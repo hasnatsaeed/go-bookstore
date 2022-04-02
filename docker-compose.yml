@@ -1,0 +1,13 @@
+version: '3.1'
+
+services:
+  db_server:
+    image: mysql:8.0.25
+    restart: always
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_USER: spxUsr
+      MYSQL_PASSWORD: vqkWWHptpCwmkgDw8twQuExC
+      MYSQL_ROOT_PASSWORD: vqkWWHptpCwmkgDw8twQuExC
+      MYSQL_DATABASE: go-bookstore
