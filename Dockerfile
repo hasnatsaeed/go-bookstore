@@ -1,14 +1,15 @@
 #  base image for Go
 FROM golang:latest
-
-RUN mkdir /app
-
 # Set the Current Working Directory inside the container
+
 WORKDIR /app
 
-ADD . /app
+RUN git clone https://github.com/hasnatsaeed/go-bookstore.git
 
-# Build the Go app
-RUN go get github.com/hasnatsaeed/go-bookstore && go build -o app/cmd/main.go
+WORKDIR /app/go-bookstore
 
-ENTRYPOINT ["/app/cmd/main"]
+#RUN go build -o go-bookstore
+
+EXPOSE 8080
+
+ENTRYPOINT ["go", "run", "/app/go-bookstore/cmd/main/main.go"]
