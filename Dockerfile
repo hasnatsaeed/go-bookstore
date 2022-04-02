@@ -10,6 +10,6 @@ WORKDIR /app/go-bookstore
 
 #RUN go build -o go-bookstore
 
-EXPOSE 8080
+EXPOSE 9010
 
 ENTRYPOINT ["go", "run", "/app/go-bookstore/cmd/main/main.go"]
