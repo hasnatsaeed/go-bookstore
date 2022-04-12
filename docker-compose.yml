@@ -7,6 +7,8 @@ services:
     restart: always
     ports:
       - "9010:9010"
+    env_file:
+      - .env
     depends_on:
       - "db"
   db:
@@ -15,6 +17,8 @@ services:
     restart: always
     ports:
       - "3308:${DB_PORT}"
+    env_file:
+      - .env
     environment:
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASS}
