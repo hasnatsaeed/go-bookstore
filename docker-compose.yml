@@ -16,7 +16,7 @@ services:
     container_name: db
     restart: always
     ports:
-      - "3308:${DB_PORT}"
+      - "${DB_HOST_PORT}:${DB_PORT}"
     env_file:
       - .env
     environment:
