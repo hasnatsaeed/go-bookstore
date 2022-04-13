@@ -6,14 +6,14 @@ services:
     container_name: app
     restart: always
     ports:
-      - "9010:9010"
+      - "${APP_HOST_PORT}:${APP_PORT}"
     env_file:
       - .env
     depends_on:
-      - "db"
+      - "${DB_HOST}"
   db:
     image: mysql:8.0.25
-    container_name: db
+    container_name: ${DB_HOST}
     restart: always
     ports:
       - "${DB_HOST_PORT}:${DB_PORT}"

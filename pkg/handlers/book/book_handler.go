@@ -21,39 +21,39 @@ type Handler struct {
 	repository book.Repository
 }
 
-func (book *Handler) FetchAll(w http.ResponseWriter, r *http.Request) {
+func (handler *Handler) FetchAll(w http.ResponseWriter, r *http.Request) {
 
-	books, _ := book.repository.FetchAllBooks()
+	books, _ := handler.repository.FetchAllBooks()
 
 	respondWithJSON(w, http.StatusOK, books)
 }
 
-func (book *Handler) FetchById(w http.ResponseWriter, r *http.Request) {
+func (handler *Handler) FetchById(w http.ResponseWriter, r *http.Request) {
 	bookId, err := strconv.Atoi(mux.Vars(r)["bookId"])
 	if err != nil {
 		respondWithError(w, http.StatusBadRequest, "error while parsing 'bookId'")
 	}
-	bookById, _ := book.repository.FetchBookById(int64(bookId))
+	bookById, _ := handler.repository.FetchBookById(int64(bookId))
 	respondWithJSON(w, http.StatusOK, bookById)
 }
 
-func (book *Handler) Create(w http.ResponseWriter, r *http.Request) {
+func (handler *Handler) Create(w http.ResponseWriter, r *http.Request) {
 	bookToCreate := &models.Book{}
 	utils.ParseBody(r, bookToCreate)
-	createdBook, _ := book.repository.CreateBook(bookToCreate)
+	createdBook, _ := handler.repository.CreateBook(bookToCreate)
 	respondWithJSON(w, http.StatusOK, createdBook)
 }
 
-func (book *Handler) Delete(w http.ResponseWriter, r *http.Request) {
+func (handler *Handler) Delete(w http.ResponseWriter, r *http.Request) {
 	bookId, err := strconv.Atoi(mux.Vars(r)["bookId"])
 	if err != nil {
 		respondWithError(w, http.StatusBadRequest, "error while parsing 'bookId'")
 	}
-	deletedBook, _ := book.repository.DeleteBook(int64(bookId))
+	deletedBook, _ := handler.repository.DeleteBook(int64(bookId))
 	respondWithJSON(w, http.StatusOK, deletedBook)
 }
 
-func (book *Handler) Update(w http.ResponseWriter, r *http.Request) {
+func (handler *Handler) Update(w http.ResponseWriter, r *http.Request) {
 	bookId, err := strconv.Atoi(mux.Vars(r)["bookId"])
 	if err != nil {
 		respondWithError(w, http.StatusBadRequest, "error while parsing 'bookId'")
@@ -61,7 +61,7 @@ func (book *Handler) Update(w http.ResponseWriter, r *http.Request) {
 	update := &models.Book{}
 	utils.ParseBody(r, update)
 
-	updatedBook, _ := book.repository.UpdateBook(int64(bookId), update)
+	updatedBook, _ := handler.repository.UpdateBook(int64(bookId), update)
 
 	respondWithJSON(w, http.StatusOK, updatedBook)
 
